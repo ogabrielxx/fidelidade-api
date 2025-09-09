@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Resgate extends Model
@@ -17,4 +18,9 @@ class Resgate extends Model
         "premio",
         "valor_pontos"
     ];
+
+    public function premio(): BelongsTo
+    {
+        return $this->belongsTo(Premio::class, "premio", "id");
+    }
 }

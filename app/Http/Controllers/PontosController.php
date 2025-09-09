@@ -15,8 +15,10 @@ class PontosController extends Controller
         try {
             $identificadorCliente = $request->cliente;
 
-            $cliente = Cliente::with('resgates')
-                ->select('id', 'nome', 'saldo_pontos')
+            $cliente = Cliente::with([
+                    'resgates',
+                    'resgates.premio'
+                ])
                 ->find($identificadorCliente);
 
             if(!$cliente){
