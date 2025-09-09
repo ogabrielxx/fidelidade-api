@@ -118,7 +118,7 @@
     </header>
     <section class="content" aria-describedby="email-message">
       <h3><strong>Seu saldo é de {{ $pontos }} pontos!</strong></h3>
-      <h5 id="email-message">Com 5 ou mais pontos já é possível resgatar prêmios, venha até nossa loja para saber mais!</h5>
+      <h5 id="email-message">Parabéns, com essa pontuação já é possível resgatar o prêmio máximo, venha até nossa loja para saber mais!</h5>
     </section>
     <footer class="footer">
       <p>© {{ date('Y') }} Restaurante tatata - Todos os direitos reservados.</p>
