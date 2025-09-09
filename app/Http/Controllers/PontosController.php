@@ -45,12 +45,26 @@ class PontosController extends Controller
                 return response()->json(["message"=> "Cliente não encontrado!"],404);
             }
 
-            $pontos = calcularPontos($valorGasto);
-
+            $pontos = calcularPontos($valorGasto)["pontos"];
             $novoSaldo = $cliente->saldo_pontos + $pontos;
 
+            $valorRemanescente = calcularPontos($valorGasto)["valor_remanescente"];
+
+            $valorRemanescenteCliente = $cliente->valor_remanescente;
+
+            $valorRemanescenteTotal = $valorRemanescente + $valorRemanescenteCliente;
+
+            // Se o valor remanescente total for maior ou igual a cinco adiciona mais um ponto ao saldo e salva o (valor remanescente - 5 (1 ponto)) no campo de valor_remanescente
+            if($valorRemanescenteTotal >= 5){
+                $novoSaldo++;
+                $valorRemanescenteTransacaoAtual = $valorRemanescenteTotal - 5;
+            }else{
+                $valorRemanescenteTransacaoAtual = $valorRemanescenteTotal;
+            }
+
             $cliente->update([
-                "saldo_pontos" => $cliente->saldo_pontos + $pontos
+                "saldo_pontos" => $novoSaldo,
+                "valor_remanescente" => $valorRemanescenteTransacaoAtual
             ]);
 
             Mail::to($cliente->email, $cliente->nome)->queue((new PontuarClienteMail($novoSaldo))->onQueue('pontuar'));

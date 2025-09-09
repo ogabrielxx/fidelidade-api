@@ -2,5 +2,8 @@
 
 function calcularPontos($valorGasto)
 {
-    return (int) floor($valorGasto / 5);
+    return [
+        "pontos" => (int) floor($valorGasto / 5),
+        "valor_remanescente" => fmod($valorGasto, 5)
+    ];
 }

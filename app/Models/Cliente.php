@@ -17,6 +17,7 @@ class Cliente extends Model
         "email",
         "cpf",
         "saldo_pontos",
+        "valor_remanescente"
     ];
 
     public function resgates(): HasMany
