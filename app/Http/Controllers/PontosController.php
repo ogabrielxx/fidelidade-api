@@ -35,6 +35,10 @@ class PontosController extends Controller
             $valorGasto = $data["valor_gasto"];
             $identificadorCliente = $request->cliente;
 
+            if($valorGasto < 5){
+                return response()->json(["message"=> "O valor gasto não atingiu o mínimo necessário para pontuar"],403);
+            }
+
             $cliente = Cliente::find($identificadorCliente);
 
             if(!$cliente){
