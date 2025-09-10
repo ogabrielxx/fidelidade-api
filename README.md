@@ -52,7 +52,7 @@ php artisan migrate
 php arisan db:seed
 ```
 
-##Hora de rodar!
+## Hora de rodar!
 
 Para iniciar o projeto:
 
